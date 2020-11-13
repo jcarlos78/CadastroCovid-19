@@ -17,6 +17,34 @@ int main()
     if(strcmp(usuario,"jose.menezes")==0 && strcmp(senha,"senha123")==0){
         printf("Preencher dados do pasciente:\n");
 
+        char nome[60];
+        char cpf[9];
+        char telefone[20];
+        char rua[100];
+        char numero[20];
+        char bairro[60];
+        char cidade[60];
+        char estado[60];
+        char cep[20];
+
+        printf("Nome do paciente\n");
+        scanf("%s",nome);
+        printf("CPF\n");
+        scanf("%s",cpf);
+        printf("Telefone\n");
+        scanf("%s",telefone);
+        printf("Rua\n");
+        scanf("%s",rua);
+        printf("Numero\n");
+        scanf("%s",numero);
+        printf("Bairro\n");
+        scanf("%s",bairro);
+        printf("Cidade\n");
+        scanf("%s",cidade);
+        printf("Estado\n");
+        scanf("%s",estado);
+        printf("CEP\n");
+        scanf("%s",cep);
 
 
     }else{
