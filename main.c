@@ -7,6 +7,22 @@ int main()
     char usuario[30];
     char senha[30];
 
+    struct ficha_do_pacient{
+        char nome[60];
+        char cpf[9];
+        char telefone[20];
+        char rua[100];
+        char numero[20];
+        char bairro[60];
+        char cidade[60];
+        char estado[60];
+        char cep[20];
+        //DD/MM/AAAA
+        char data[8];
+        //comordidades separadas por virgula
+        char comordidade[200]; // possivelmente opcao de escolha
+    } paciente;
+
     printf("Bem vindo ao sistema de cadastro para rastreamento covid-19.\n");
 
     printf("Usuario\n");
@@ -17,34 +33,26 @@ int main()
     if(strcmp(usuario,"jose.menezes")==0 && strcmp(senha,"senha123")==0){
         printf("Preencher dados do pasciente:\n");
 
-        char nome[60];
-        char cpf[9];
-        char telefone[20];
-        char rua[100];
-        char numero[20];
-        char bairro[60];
-        char cidade[60];
-        char estado[60];
-        char cep[20];
+        fflush(stdin);
 
         printf("Nome do paciente\n");
-        scanf("%s",nome);
+        fgets(paciente.nome,60,stdin);
         printf("CPF\n");
-        scanf("%s",cpf);
+        fgets(paciente.cpf,9,stdin);
         printf("Telefone\n");
-        scanf("%s",telefone);
+        fgets(paciente.telefone,20,stdin);
         printf("Rua\n");
-        scanf("%s",rua);
+        fgets(paciente.rua,100,stdin);
         printf("Numero\n");
-        scanf("%s",numero);
+        fgets(paciente.numero,20,stdin);
         printf("Bairro\n");
-        scanf("%s",bairro);
+        fgets(paciente.bairro,60,stdin);
         printf("Cidade\n");
-        scanf("%s",cidade);
+        fgets(paciente.cidade,60,stdin);
         printf("Estado\n");
-        scanf("%s",estado);
+        fgets(paciente.estado,60,stdin);
         printf("CEP\n");
-        scanf("%s",cep);
+        fgets(paciente.cep,8,stdin);
 
 
     }else{
@@ -53,3 +61,14 @@ int main()
 
     return 0;
 }
+
+
+/*void salvar_paciente(){
+
+    FILE *arquivo;
+
+    arquivo = fopen("pacientes.txt","");
+
+    fclose(arquivo);
+
+}*/
