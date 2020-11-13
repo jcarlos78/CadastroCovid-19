@@ -5,7 +5,7 @@
 
 typedef struct ficha_do_paciente {
     char nome[60];
-    char cpf[9];
+    char cpf[60];
     char telefone[20];
     char rua[100];
     char numero[20];
@@ -28,48 +28,57 @@ struct ficha_do_paciente preenche_ficha(void) {
 
     printf("Nome do paciente\n");
     fgets(paciente.nome,60,stdin);
-
-    fflush(stdin);
+    //if(paciente.nome[strlen(paciente.nome) -1] == "\n"){
+    //    paciente.nome[strlen(paciente.nome) -1] = "\0";
+    //}
 
     printf("CPF\n");
-    fgets(paciente.cpf,9,stdin);
-
-    fflush(stdin);
+    fgets(paciente.cpf,60,stdin);
+    //if(paciente.cpf[strlen(paciente.cpf) -1] == "\n"){
+    //    paciente.cpf[strlen(paciente.cpf) -1] = "\0";
+    //}
 
     printf("Telefone\n");
     fgets(paciente.telefone,20,stdin);
-
-    fflush(stdin);
+    //if(paciente.telefone[strlen(paciente.telefone) -1] == "\n"){
+    //    paciente.telefone[strlen(paciente.telefone) -1] = "\0";
+    //}
 
     printf("Rua\n");
     fgets(paciente.rua,100,stdin);
-
-    fflush(stdin);
+    //if(paciente.rua[strlen(paciente.rua) -1] == "\n"){
+    //    paciente.rua[strlen(paciente.rua) -1] = "\0";
+    //}
 
     printf("Numero\n");
     fgets(paciente.numero,20,stdin);
-
-    fflush(stdin);
+    //if(paciente.numero[strlen(paciente.numero) -1] == "\n"){
+    //    paciente.numero[strlen(paciente.numero) -1] = "\0";
+    //}
 
     printf("Bairro\n");
     fgets(paciente.bairro,60,stdin);
-
-    fflush(stdin);
+    //if(paciente.bairro[strlen(paciente.bairro) -1] == "\n"){
+    //    paciente.bairro[strlen(paciente.bairro) -1] = "\0";
+    //}
 
     printf("Cidade\n");
     fgets(paciente.cidade,60,stdin);
-
-    fflush(stdin);
+    //if(paciente.cidade[strlen(paciente.cidade) -1] == "\n"){
+    //    paciente.cidade[strlen(paciente.cidade) -1] = "\0";
+    //}
 
     printf("Estado\n");
     fgets(paciente.estado,60,stdin);
-
-    fflush(stdin);
+    //if(paciente.estado[strlen(paciente.estado) -1] == "\n"){
+    //    paciente.estado[strlen(paciente.estado) -1] = "\0";
+    //}
 
     printf("CEP\n");
     fgets(paciente.cep,8,stdin);
-
-    fflush(stdin);
+    //if(paciente.cep[strlen(paciente.cep) -1] == "\n"){
+    //    paciente.cep[strlen(paciente.cep) -1] = "\0";
+    //}
 
     return paciente;
 
@@ -140,12 +149,12 @@ void ler_paciente(void) {
       exit (1);
     }
     while(fread(&inp, sizeof(struct ficha_do_paciente), 1, inf))
-      printf ("name = %s\n", inp.nome);
+      printf ("name = %s\ntelefone = %s\n", inp.nome, inp.telefone);
     fclose (inf);
 
 }
 
-struct Student {
+/*struct Student {
    int roll_no;
    char name[20];
 };
@@ -177,6 +186,6 @@ int main2 () {
    while(fread(&inp, sizeof(struct Student), 1, inf))
       printf ("roll_no = %d name = %s\n", inp.roll_no, inp.name);
    fclose (inf);
-}
+}*/
 
 
