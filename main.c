@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 
 typedef struct ficha_do_paciente {
     char nome[60];
+    //TODO validar cpf
     char cpf[60];
+    //TODO validar telefone
     char telefone[20];
     char rua[100];
     char numero[20];
@@ -14,9 +16,11 @@ typedef struct ficha_do_paciente {
     char estado[60];
     char cep[20];
     //DD/MM/AAAA
-    char data[8];
-    //comordidades separadas por virgula
-    char comordidade[200]; // possivelmente opcao de escolha
+    char data_diagnostico[20];
+    char data_nascimento[20];
+    char email[20];
+    //TODO comordidades separadas por virgula
+    char comordidade[200]; //TODO possivelmente opcao de escolha
 };
 
 
@@ -26,59 +30,48 @@ struct ficha_do_paciente preenche_ficha(void) {
 
     fflush(stdin);
 
-    printf("Nome do paciente\n");
-    fgets(paciente.nome,60,stdin);
-    //if(paciente.nome[strlen(paciente.nome) -1] == "\n"){
-    //    paciente.nome[strlen(paciente.nome) -1] = "\0";
-    //}
+    //procurei muito uma forma melhor de pegar a data via input
+    //TODO validar data
+    printf("Data do diagnostico\n");
+    printf("Usar formato dd\mm\aaaa\n");
+    int d,m,y;
+    fgets(paciente.data_diagnostico,sizeof(paciente.data_diagnostico), stdin);
 
-    printf("CPF\n");
-    fgets(paciente.cpf,60,stdin);
-    //if(paciente.cpf[strlen(paciente.cpf) -1] == "\n"){
-    //    paciente.cpf[strlen(paciente.cpf) -1] = "\0";
-    //}
+    //Usar para pegar dia mes e ano da variavel
+    //sscanf(paciente.data_diagnostico,"%d/%d/%d", &d, &m, &y);
+
+    printf("Nome do paciente\n");
+    fgets(paciente.nome,sizeof(paciente.nome),stdin);
+
+    printf("Data de nascimento\n");
+    fgets(paciente.data_nascimento, sizeof(paciente.data_nascimento),stdin);
+
+    printf("Email\n");
+    fgets(paciente.email,sizeof(paciente.email),stdin);
 
     printf("Telefone\n");
-    fgets(paciente.telefone,20,stdin);
-    //if(paciente.telefone[strlen(paciente.telefone) -1] == "\n"){
-    //    paciente.telefone[strlen(paciente.telefone) -1] = "\0";
-    //}
+    fgets(paciente.telefone,sizeof(paciente.telefone),stdin);
+
+    printf("CPF\n");
+    fgets(paciente.cpf,sizeof(paciente.cpf),stdin);
 
     printf("Rua\n");
-    fgets(paciente.rua,100,stdin);
-    //if(paciente.rua[strlen(paciente.rua) -1] == "\n"){
-    //    paciente.rua[strlen(paciente.rua) -1] = "\0";
-    //}
+    fgets(paciente.rua,sizeof(paciente.rua),stdin);
 
     printf("Numero\n");
-    fgets(paciente.numero,20,stdin);
-    //if(paciente.numero[strlen(paciente.numero) -1] == "\n"){
-    //    paciente.numero[strlen(paciente.numero) -1] = "\0";
-    //}
+    fgets(paciente.numero,sizeof(paciente.numero),stdin);
 
     printf("Bairro\n");
-    fgets(paciente.bairro,60,stdin);
-    //if(paciente.bairro[strlen(paciente.bairro) -1] == "\n"){
-    //    paciente.bairro[strlen(paciente.bairro) -1] = "\0";
-    //}
+    fgets(paciente.bairro,sizeof(paciente.bairro),stdin);
 
     printf("Cidade\n");
-    fgets(paciente.cidade,60,stdin);
-    //if(paciente.cidade[strlen(paciente.cidade) -1] == "\n"){
-    //    paciente.cidade[strlen(paciente.cidade) -1] = "\0";
-    //}
+    fgets(paciente.cidade,sizeof(paciente.cidade),stdin);
 
     printf("Estado\n");
-    fgets(paciente.estado,60,stdin);
-    //if(paciente.estado[strlen(paciente.estado) -1] == "\n"){
-    //    paciente.estado[strlen(paciente.estado) -1] = "\0";
-    //}
+    fgets(paciente.estado,sizeof(paciente.estado),stdin);
 
     printf("CEP\n");
-    fgets(paciente.cep,8,stdin);
-    //if(paciente.cep[strlen(paciente.cep) -1] == "\n"){
-    //    paciente.cep[strlen(paciente.cep) -1] = "\0";
-    //}
+    fgets(paciente.cep,sizeof(paciente.cep),stdin);
 
     return paciente;
 
@@ -103,6 +96,7 @@ int main() {
 
         printf("Preencher dados do pasciente:\n");
 
+        //Dar a opcao de verficiar os dados e optar por preencher novamente.
         struct ficha_do_paciente paciente = preenche_ficha();
 
         salvar_paciente(paciente);
@@ -128,7 +122,7 @@ void salvar_paciente(struct ficha_do_paciente paciente) {
           exit (1);
        }
        struct ficha_do_paciente inp1 = {"jose", "Ram"};
-       //struct Student inp2 = {2, "Shyam"};
+
        fwrite (&paciente, sizeof(struct ficha_do_paciente), 1, of);
 
        if(fwrite != 0)
