@@ -23,6 +23,10 @@ typedef struct ficha_do_paciente {
     char comordidade[200]; //TODO possivelmente opcao de escolha
 };
 
+typedef struct grupo_de_risco {
+    char cep[20];
+    int idade;
+};
 
 struct ficha_do_paciente preenche_ficha(void) {
 
@@ -105,17 +109,21 @@ int main() {
 
         int idade_do_paciente = idade(d_nascimento,m_nascimento,a_nascimento);
 
-        printf("Paciente com %d anos de idade", idade_do_paciente);
+        //ler_paciente();
 
-        ler_paciente();
+        //Aramazenando grupo de risco
+        if(idade_do_paciente>65 && strlen(paciente.comordidade) !=0 ){
+            struct grupo_de_risco paciente_grupo_de_risco = {paciente.cep,idade_do_paciente};
+            salvar_grupo_de_risco(paciente_grupo_de_risco);
+        }
+
 
     }else{
-        printf("Usuario ou senha invalidos!");
+        printf("Usuario ou senha invalidos!\n");
     }
 
     return 0;
 }
-
 
 
 void salvar_paciente(struct ficha_do_paciente paciente) {
@@ -124,17 +132,36 @@ void salvar_paciente(struct ficha_do_paciente paciente) {
 
        of= fopen ("pacientes.txt", "w");
        if (of == NULL) {
-          fprintf(stderr, "\nError to open the file\n");
+          fprintf(stderr, "\nErro acessando dados\n");
           exit (1);
        }
-       struct ficha_do_paciente inp1 = {"jose", "Ram"};
 
        fwrite (&paciente, sizeof(struct ficha_do_paciente), 1, of);
 
        if(fwrite != 0)
-          printf("Contents to file written successfully !\n");
+          printf("Dados aaaaarmazenados com sucesso !\n");
        else
-          printf("Error writing file !\n");
+          printf("Erro armazenando dados !\n");
+       fclose (of);
+
+}
+
+void salvar_grupo_de_risco(struct ficha_do_paciente paciente) {
+
+       FILE *of;
+
+       of= fopen ("grupo_de_risco.txt", "w");
+       if (of == NULL) {
+          fprintf(stderr, "\nErro acessando dados\n");
+          exit (1);
+       }
+
+       fwrite (&paciente, sizeof(struct ficha_do_paciente), 1, of);
+
+       if(fwrite != 0)
+          printf("Dados armazenados com sucesso !\n");
+       else
+          printf("Erro armazenando dados !\n");
        fclose (of);
 
 }
@@ -145,7 +172,7 @@ void ler_paciente(void) {
     struct ficha_do_paciente inp;
     inf = fopen ("pacientes.txt", "r");
     if (inf == NULL) {
-      fprintf(stderr, "\nError to open the file\n");
+      fprintf(stderr, "\nErro acessando dados\n");
       exit (1);
     }
     while(fread(&inp, sizeof(struct ficha_do_paciente), 1, inf))
