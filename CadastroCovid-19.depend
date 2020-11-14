@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1605378828 source:/home/box1/App/PIM IV/CadastroCovid-19/main.c
+1605380796 source:/home/box1/App/PIM IV/CadastroCovid-19/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

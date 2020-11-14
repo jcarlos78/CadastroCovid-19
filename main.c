@@ -34,11 +34,7 @@ struct ficha_do_paciente preenche_ficha(void) {
     //TODO validar data
     printf("Data do diagnostico\n");
     printf("Usar formato dd\mm\aaaa\n");
-    int d,m,y;
     fgets(paciente.data_diagnostico,sizeof(paciente.data_diagnostico), stdin);
-
-    //Usar para pegar dia mes e ano da variavel
-    //sscanf(paciente.data_diagnostico,"%d/%d/%d", &d, &m, &y);
 
     printf("Nome do paciente\n");
     fgets(paciente.nome,sizeof(paciente.nome),stdin);
@@ -92,6 +88,7 @@ int main() {
     //limpar final da string
     senha[strcspn(senha,"\n")] = 0;
 
+    //if(1){
     if(strcmp(usuario,"jose.menezes")==0 && strcmp(senha,"senha123")==0){
 
         printf("Preencher dados do pasciente:\n");
@@ -99,7 +96,16 @@ int main() {
         //Dar a opcao de verficiar os dados e optar por preencher novamente.
         struct ficha_do_paciente paciente = preenche_ficha();
 
+        //SALVAR cadastro do paciente
         salvar_paciente(paciente);
+
+        int d_nascimento,m_nascimento,a_nascimento;
+        //Usar para pegar dia mes e ano da variavel
+        sscanf(paciente.data_nascimento,"%d/%d/%d", &d_nascimento, &m_nascimento, &a_nascimento);
+
+        int idade_do_paciente = idade(d_nascimento,m_nascimento,a_nascimento);
+
+        printf("Paciente com %d anos de idade", idade_do_paciente);
 
         ler_paciente();
 
@@ -148,38 +154,27 @@ void ler_paciente(void) {
 
 }
 
-/*struct Student {
-   int roll_no;
-   char name[20];
-};
+int idade(int dia_nascimento, int mes_nascimento, int ano_nascimento) {
 
+    time_t hoje;
+    time(&hoje);
+    struct tm *local = localtime(&hoje);
+    int dia_atual = local->tm_mday;
+    int mes_atual = local->tm_mon +1;
+    int ano_atual = local->tm_year + 1900;
 
-int main2 () {
-   FILE *of;
-   of= fopen ("c1.txt", "w");
-   if (of == NULL) {
-      fprintf(stderr, "\nError to open the file\n");
-      exit (1);
+   int month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+   if (dia_nascimento > dia_atual) {
+      dia_atual = dia_atual + month[mes_nascimento - 1];
+      mes_atual = mes_atual - 1;
    }
-   struct Student inp1 = {1, "Ram"};
-   struct Student inp2 = {2, "Shyam"};
-   fwrite (&inp1, sizeof(struct Student), 1, of);
-   fwrite (&inp2, sizeof(struct Student), 1, of);
-   if(fwrite != 0)
-      printf("Contents to file written successfully !\n");
-   else
-      printf("Error writing file !\n");
-   fclose (of);
-   FILE *inf;
-   struct Student inp;
-   inf = fopen ("c1.txt", "r");
-   if (inf == NULL) {
-      fprintf(stderr, "\nError to open the file\n");
-      exit (1);
+   if (mes_nascimento > mes_atual) {
+      ano_atual = ano_atual - 1;
+      mes_atual = mes_atual + 12;
    }
-   while(fread(&inp, sizeof(struct Student), 1, inf))
-      printf ("roll_no = %d name = %s\n", inp.roll_no, inp.name);
-   fclose (inf);
-}*/
+
+   int idade = ano_atual - ano_nascimento;
+   return idade;
+}
 
 
