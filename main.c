@@ -37,13 +37,14 @@ struct ficha_do_paciente preenche_ficha(void) {
     //procurei muito uma forma melhor de pegar a data via input
     //TODO validar data
     printf("Data do diagnostico\n");
-    printf("Usar formato dd\mm\aaaa\n");
+    printf("Usar formato dd/mm/aaaa\n");
     fgets(paciente.data_diagnostico,sizeof(paciente.data_diagnostico), stdin);
 
     printf("Nome do paciente\n");
     fgets(paciente.nome,sizeof(paciente.nome),stdin);
 
     printf("Data de nascimento\n");
+    printf("Usar formato dd/mm/aaaa\n");
     fgets(paciente.data_nascimento, sizeof(paciente.data_nascimento),stdin);
 
     printf("Email\n");
