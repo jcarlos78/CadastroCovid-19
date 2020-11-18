@@ -80,9 +80,9 @@ struct ficha_do_paciente preenche_ficha(void) {
 int main() {
     char usuario[30];
     char senha[30];
-
+    printf("########################################\n");
     printf("Bem vindo ao sistema de cadastro para rastreamento covid-19.\n");
-
+    printf("########################################\n");
     printf("Usuario\n");
     fgets(usuario,30,stdin);
     //limpar final da string
@@ -91,12 +91,12 @@ int main() {
     fgets(senha,30,stdin);
     //limpar final da string
     senha[strcspn(senha,"\n")] = 0;
-
+    printf("########################################\n");
     //if(1){
     if(strcmp(usuario,"jose.menezes")==0 && strcmp(senha,"senha123")==0){
 
         printf("Preencher dados do pasciente:\n");
-
+        printf("########################################\n");
         //Dar a opcao de verficiar os dados e optar por preencher novamente.
         struct ficha_do_paciente paciente = preenche_ficha();
 
@@ -109,7 +109,7 @@ int main() {
 
         int idade_do_paciente = idade(d_nascimento,m_nascimento,a_nascimento);
 
-        //ler_paciente();
+        ler_paciente();
 
         //Aramazenando grupo de risco
         if(idade_do_paciente>65 && strlen(paciente.comordidade) !=0 ){
@@ -121,7 +121,7 @@ int main() {
     }else{
         printf("Usuario ou senha invalidos!\n");
     }
-
+    printf("########################################\n");
     return 0;
 }
 
@@ -139,7 +139,7 @@ void salvar_paciente(struct ficha_do_paciente paciente) {
        fwrite (&paciente, sizeof(struct ficha_do_paciente), 1, of);
 
        if(fwrite != 0)
-          printf("Dados aaaaarmazenados com sucesso !\n");
+          printf("Dados de paciente armazenados com sucesso !\n");
        else
           printf("Erro armazenando dados !\n");
        fclose (of);
@@ -159,7 +159,7 @@ void salvar_grupo_de_risco(struct ficha_do_paciente paciente) {
        fwrite (&paciente, sizeof(struct ficha_do_paciente), 1, of);
 
        if(fwrite != 0)
-          printf("Dados armazenados com sucesso !\n");
+          printf("Dados de grupo de risco armazenados com sucesso !\n");
        else
           printf("Erro armazenando dados !\n");
        fclose (of);
@@ -176,7 +176,36 @@ void ler_paciente(void) {
       exit (1);
     }
     while(fread(&inp, sizeof(struct ficha_do_paciente), 1, inf))
-      printf ("name = %s\ntelefone = %s\n", inp.nome, inp.telefone);
+      printf("########################################\n");
+      printf (
+        "Dt Diagnostico = %s"
+        "name = %s"
+        "Emai = %s"
+        "Dt Nascimento = %s"
+        "CPF = %s"
+        "Telefone = %s"
+        "Rua = %s"
+        "Numero = %s"
+        "Bairro = %s"
+        "Cidade = %s"
+        "Estado = %s"
+        "CEP = %s"
+        "Comordidades = %s",
+        inp.data_diagnostico,
+        inp.nome,
+        inp.email,
+        inp.data_nascimento,
+        inp.cpf,
+        inp.telefone,
+        inp.rua,
+        inp.numero,
+        inp.bairro,
+        inp.cidade,
+        inp.estado,
+        inp.cep,
+        inp.comordidade);
+    printf("########################################\n");
+
     fclose (inf);
 
 }
